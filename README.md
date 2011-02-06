@@ -20,13 +20,13 @@ if that proves false.
 
 ## Example
 
-mkdir -p /tmp/root/bin
-cp `which busybox.static` /tmp/root/bin/busybox
-sudo ./nschroot /tmp/root /bin/busybox msh
-mkdir /proc
-mount none /proc -t proc
-ps -ef
-ls -l /
+    mkdir -p /tmp/root/bin
+    cp `which busybox.static` /tmp/root/bin/busybox
+    sudo ./nschroot /tmp/root /bin/busybox msh
+    mkdir /proc
+    mount none /proc -t proc
+    ps -ef
+    ls -l /
 
 ## Ideas / To do
 
