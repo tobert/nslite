@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     for (i=2; i<=argc; i++) {
         newargv[i-2] = argv[i];
     }
-    argv[i+1] = "\0";
+    newargv[i] = "\0";
 
     child = nsfork(0);
     /* parent process - wait here for the child to exit */
