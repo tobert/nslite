@@ -68,6 +68,8 @@ int main(int argc, char *argv[])
         errx(1, "error in nsfork(): probably lacking privileges or running on an old kernel\n");
     }
 
+    free(newargv);
+
     return(0);
 }
 
