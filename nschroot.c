@@ -14,13 +14,14 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
 {
     struct stat sb;
     pid_t child;
-    int i, status;
+    int i, status, argp, child_wait_stdin;
     char *program, *newroot, *command;
     char *newenv[] = { NULL };
     char **newargv;
@@ -28,9 +29,17 @@ int main(int argc, char *argv[])
     if (argc < 3)
         errx(1, "Usage: %s <directory> <command> [args]\n", argv[0]);
 
-    program = argv[0];
-    newroot = argv[1];
-    command = argv[2];
+    /* lame for now - need to add real options parsing at some point */
+    child_wait_stdin = 0;
+    argp = 0;
+    if (strcmp(argv[0], "--child-wait-stdin")) {
+        argp = 1;
+        child_wait_stdin = 1;
+    }
+
+    program = argv[argp];
+    newroot = argv[argp+1];
+    command = argv[argp+2];
 
     if (stat(newroot, &sb) == -1)
         err(1, "'%s'", newroot);
@@ -40,7 +49,7 @@ int main(int argc, char *argv[])
     
     newargv = malloc(sizeof(argv));
     for (i=2; i<=argc; i++) {
-        newargv[i-2] = argv[i];
+        newargv[i-2] = argv[i+argp];
     }
     newargv[i] = "\0";
 
@@ -60,6 +69,14 @@ int main(int argc, char *argv[])
 
         if (stat(command, &sb) == -1)
             err(1, "'%s'", command);
+
+        /* optionally block on stdin */
+        if (child_wait_stdin == 1) {
+            while ((child_wait_stdin = getchar()) != EOF) {
+                if (child_wait_stdin == '\n')
+                    break;
+            }
+        }
 
         if (execve(command, newargv, newenv) == -1)
             err(1, "'%s'", command);
