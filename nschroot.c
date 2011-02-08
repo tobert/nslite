@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
     /* parent process - wait here for the child to exit */
     if (child > 0) {
         /* TODO: good enough for testing but needs to be checked */
+        printf("%d\n", child);
         waitpid(child, &status, 0);
     }
     /* child process */
