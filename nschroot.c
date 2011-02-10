@@ -16,6 +16,14 @@
 #include <unistd.h>
 #include <stdio.h>
 
+static void usage(char *program)
+{
+    printf("%s: chroot into a new Linux namespace.\n\n", program);
+    printf("Usage:\n");
+    printf("  %s <chroot path> <executable> [executable args]\n", program);
+    exit(1);
+}
+
 int main(int argc, char *argv[])
 {
     struct stat sb;
@@ -26,7 +34,7 @@ int main(int argc, char *argv[])
     char **newargv;
 
     if (argc < 3)
-        errx(1, "Usage: %s <directory> <command> [args]\n", argv[0]);
+        usage(argv[0]);
 
     program = argv[0];
     newroot = argv[1];
