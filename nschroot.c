@@ -1,7 +1,7 @@
 /*
  * nschroot - chroot into a fresh Linux namespace
  * Copyright 2011, Albert P. Tobey <tobert@gmail.com>
- * https://github.com/tobert/nschroot
+ * https://github.com/tobert/nslite
  * 
  * This is free software; you can redistribute it and/or modify it under the
  * terms of the Artistic License 2.0.  See the file LICENSE for details.

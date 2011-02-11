@@ -9,6 +9,7 @@ inside chroots, I decided to throw this together for general use.
 ## Requirements
 
 Linux >= 2.6.24 with CONFIG_NAMESPACES=y
+
 Root or CAP_SYS_ADMIN privileges
 
 ## Build
