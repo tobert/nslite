@@ -41,6 +41,7 @@ pid_t nsfork(int extra_flags)
     pid_t child_pid = 0;
 
 #ifdef TESTING
+    clone_flags = 1; /* silence unused variable errors */
     child_pid = fork();
 #else
     // manual sys_clone behaves like fork() but allows flags to create a namespace

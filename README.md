@@ -29,6 +29,22 @@ if that proves false.
     ps -ef
     ls -l /
 
+## nslite-rpc
+
+All commands and responses are to be prefixed with their size in a binary
+16 bit unsigned integer in network order. (e.g. perl pack("n", $number)).
+
+NOTE: this is an experiment at the moment.
+
+### Commands
+
+    { "method": "status", "id": 1 }
+    { "method": "kill", "params": [9], "id": 1 }
+
+### Response
+
+    { "result": 1, "error": null, "id": 1 }
+
 ## Ideas / To do
 
 * fill in nsexec
