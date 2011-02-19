@@ -64,10 +64,10 @@ int main(int argc, char *argv[])
     /* child process */
     else if (child == 0) {
         if (chdir(newroot) == -1)
-            err(1, NULL);
+            err(1, "chdir to directory '%s' failed", newroot);
 
         if (chroot(".") == -1)
-            err(1, NULL);
+            err(1, "chroot failed");
 
         if (stat(command, &sb) == -1)
             err(1, "'%s'", command);
