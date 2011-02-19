@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <linux/sched.h>
 
 #ifndef _NSFORK_H
 #define _NSFORK_H 1
