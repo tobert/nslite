@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     if (stat(newroot, &sb) == -1)
         err(1, "'%s'", newroot);
 
-    if (S_ISDIR(sb.st_mode))
+    if (!S_ISDIR(sb.st_mode))
         errx(1, "stat(): '%s' is not a directory\n", newroot);
     
     newargv = malloc(sizeof(argv));
