@@ -7,7 +7,8 @@
  * terms of the Artistic License 2.0.  See the file LICENSE for details.
  */
 
-#include "nsfork.h"
+#include "config.h"
+
 #include <err.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -15,6 +16,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+
+#include "nsfork.h"
 
 static void usage(char *program)
 {
@@ -43,7 +46,7 @@ int main(int argc, char *argv[])
     if (stat(newroot, &sb) == -1)
         err(1, "'%s'", newroot);
 
-    if ((sb.st_mode & S_IFMT) != S_IFDIR)
+    if (S_ISDIR(sb.st_mode))
         errx(1, "stat(): '%s' is not a directory\n", newroot);
     
     newargv = malloc(sizeof(argv));
