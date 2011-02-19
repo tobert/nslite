@@ -10,11 +10,13 @@
  * execution requires root and/or CAP_SYS_ADMIN
  */
 
+#include "config.h"
+
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <signal.h>
-#define _GNU_SOURCE
-#include <sched.h>
+
+#include "nsfork.h"
 
 /* extra_flags:
  * set to 0 for regular nsfork, which leaves the new process in the same
@@ -38,8 +40,12 @@ pid_t nsfork(int extra_flags)
     int clone_flags = extra_flags | CLONE_NEWNS | CLONE_NEWIPC | CLONE_NEWPID | CLONE_NEWUTS | SIGCHLD;
     pid_t child_pid = 0;
 
+#ifdef TESTING
+    child_pid = fork();
+#else
     // manual sys_clone behaves like fork() but allows flags to create a namespace
     child_pid = syscall(SYS_clone, clone_flags, 0);
+#endif
 
     return child_pid;
 }
