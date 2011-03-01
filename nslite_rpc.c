@@ -16,7 +16,7 @@
 
 #include "nslite_rpc.h"
 
-size_t nslite_packet_size(const char *buffer)
+size_t nslite_packet_size(const char * buffer)
 {
     uint8_t size[NSLITE_PREFIX_BYTES];
     size_t packet_size = 0;
