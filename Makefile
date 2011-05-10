@@ -1,7 +1,7 @@
 
-CFLAGS=-O2 -Wall
+CFLAGS=-O2 -Wall -fPIC
 
-all: libnsfork.a nschroot
+all: libnsfork.so libnsfork.a nschroot
 #all: nschroot nsexec
 
 %.o: %.c
@@ -16,5 +16,8 @@ nschroot: nsfork.o nschroot.o
 libnsfork.a: nsfork.o
 	ar rcs libnsfork.a nsfork.o
 
+libnsfork.so: nsfork.o
+	gcc -shared -Wl,-soname,libnsfork.so.1 -o libnsfork.so.0.0.1 nsfork.o -lc
+
 clean:
-	rm -f *.o nschroot nsexec libnsfork.a
+	rm -f *.o nschroot nsexec libnsfork.a libnsfork.so.0.0.1
