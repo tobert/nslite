@@ -39,7 +39,7 @@ if that proves false.
 
 ## Author
 
-Al Tobey <tobert@gmail.com> @AlTobey
+Amy Tobey <tobert@gmail.com> @MissAmyTobey
 
 ## License
 
